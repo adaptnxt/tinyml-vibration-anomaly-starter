@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tinyml-vibration-anomaly-starter"
+version = "0.1.0"
+description = "Production TinyML pipeline and embedded C firmware for real-time vibration FFT anomaly detection under 256KB RAM."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "AdaptNXT Embedded Systems & Edge AI Team", email = "queries@adaptnxt.com" }
+]
+license = { text = "Apache-2.0" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: C",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: System :: Hardware",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence"
+]
+dependencies = [
+    "pydantic>=2.0.0",
+    "numpy>=1.22.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0"
+]
+
+[project.scripts]
+adaptnxt-tinyml = "tinyml_vibration.cli:main"
+
+[project.urls]
+Homepage = "https://www.adaptnxt.com/tinyml-edge-ai-microcontroller-services"
+Documentation = "https://github.com/adaptnxt/tinyml-vibration-anomaly-starter#readme"
+Repository = "https://github.com/adaptnxt/tinyml-vibration-anomaly-starter"
+"Company Solutions" = "https://www.adaptnxt.com"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

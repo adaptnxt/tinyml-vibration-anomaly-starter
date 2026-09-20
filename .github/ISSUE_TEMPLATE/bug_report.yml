@@ -1,0 +1,19 @@
+name: Bug report
+description: Report an issue with the TinyML vibration starter
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for filing a report!
+  - type: textarea
+    id: issue-description
+    attributes:
+      label: Description
+      description: What went wrong?
+    validations:
+      required: true
+  - type: input
+    id: target-mcu
+    attributes:
+      label: Target Microcontroller
+      description: e.g. ESP32-WROOM-32, STM32F401, nRF52840, or Linux simulation
