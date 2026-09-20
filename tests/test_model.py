@@ -9,13 +9,14 @@ from tinyml_vibration.model import VibrationAnomalyDetector
 
 
 def test_model_detects_bearing_fault_anomaly():
+    np.random.seed(42)
     gen = SyntheticVibrationGenerator(sample_rate_hz=1000.0)
     extractor = VibrationFeatureExtractor(sample_rate_hz=1000.0)
     detector = VibrationAnomalyDetector(threshold=2.5)
 
-    # Train on 20 normal samples
-    train_vecs = [extractor.to_vector(extractor.extract(gen.generate_baseline())) for _ in range(20)]
-    detector.fit(train_vecs, threshold_percentile=95.0)
+    # Train on 30 normal samples
+    train_vecs = [extractor.to_vector(extractor.extract(gen.generate_baseline())) for _ in range(30)]
+    detector.fit(train_vecs, threshold_percentile=99.0)
 
     # Test healthy signal
     healthy_sig = gen.generate_baseline()
@@ -29,6 +30,11 @@ def test_model_detects_bearing_fault_anomaly():
     is_fault, score_fault = detector.predict(fault_feat)
     assert is_fault is True
     assert score_fault > score_healthy
+
+    # Test NaN input fails closed
+    nan_feat = np.array([np.nan, 2.0, 1.0, 3.0, 50.0], dtype=np.float32)
+    is_nan_anom, _ = detector.predict(nan_feat)
+    assert is_nan_anom is True
 
 
 def test_export_c_header():

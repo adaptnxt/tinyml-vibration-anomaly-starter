@@ -31,7 +31,9 @@ class VibrationAnomalyDetector:
         return float(np.sqrt(np.mean(z ** 2)))
 
     def predict(self, feature_vector: np.ndarray) -> Tuple[bool, float]:
-        """Predicts whether an observation is anomalous."""
+        """Predicts whether an observation is anomalous. Non-finite data fails closed."""
+        if not np.all(np.isfinite(feature_vector)):
+            return True, float("inf")
         dist = self.score(feature_vector)
         is_anomalous = bool(dist > self.threshold)
         return is_anomalous, dist

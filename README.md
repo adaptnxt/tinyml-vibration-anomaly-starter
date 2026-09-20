@@ -62,9 +62,9 @@ Tested and optimized for resource-constrained industrial microcontrollers:
 
 | Parameter | Specification | Notes |
 | :--- | :--- | :--- |
-| **RAM Consumption** | **< 3.2 KB** | Static stack/data buffers only. Zero `malloc()` / `free()`. |
-| **Flash / Code Size** | **< 14.5 KB** | Compiles with `-Os` or `-O2` |
-| **Inference Latency** | **4.2 ms** on ESP32 (240MHz) | 256-point FFT + feature extraction + scoring |
+| **RAM Consumption** | **~5 to 8 KB** | Static buffers (256-point FFT float arrays). Zero dynamic `malloc()` / `free()`. |
+| **Flash / Code Size** | **< 16 KB** | Compiled with standard `-Os` or `-O2` optimization |
+| **Inference Latency** | **~5-15 ms** (Typical 240MHz MCU) | FFT computation + feature extraction + statistical distance scoring |
 | **Target MCUs** | ESP32, STM32F4, nRF52840, SAMD51 | Compatible with FreeRTOS, ESP-IDF, STM32 HAL, Arduino |
 
 ---
